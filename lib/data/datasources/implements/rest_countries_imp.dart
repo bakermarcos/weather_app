@@ -3,7 +3,8 @@ import 'package:weather_app/core/config/constants.dart';
 import 'package:weather_app/core/entities/capital_entity.dart';
 import 'package:weather_app/core/error/failure_imp.dart';
 import 'package:weather_app/core/services/http_connections.dart';
-import 'package:weather_app/data/datasources/contracts/rest_countries/rest_countries.dart';
+import 'package:weather_app/data/datasources/contracts/rest_countries.dart';
+import 'package:weather_app/data/dtos/capital_dto.dart';
 
 class RestCountriesDataSourceImp implements RestCountriesDataSource {
   final HttpConections _apiProvider;
@@ -14,9 +15,12 @@ class RestCountriesDataSourceImp implements RestCountriesDataSource {
     try {
       var response = await _apiProvider.getConnect(
           url:
-              'https://restcountries.com/v3.1/region/$region?fields=name,capital');
+              'https://restcountries.com/v3.1/region/$region?fields=name,capital,capitalInfo,cca2');
       if (response.statusCode == okStatus) {
-        return response.data;
+        List<CapitalEntity> capitalsList = (response.data as List<dynamic>)
+            .map((e) => CapitalDto.fromJson(e).toEntity())
+            .toList();
+        return capitalsList;
       } else {
         throw FailureImp(msg: response.data['mensagem']);
       }
