@@ -1,5 +1,7 @@
 // APP DATA
 const String appName = "Weather App";
+const String imgLogo = "assets/images/circle-icons-weather.png";
+const String imgLogoUncircled = "assets/images/weather_icon.png";
 
 // API
 const String restWeatherApiKey = "2a63928ffc5d230c155fbafe5fbf779f";
