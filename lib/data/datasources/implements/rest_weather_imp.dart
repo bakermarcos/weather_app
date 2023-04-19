@@ -1,26 +1,28 @@
 import 'package:dio/dio.dart';
 import 'package:weather_app/core/config/constants.dart';
 import 'package:weather_app/core/entities/capital_entity.dart';
+import 'package:weather_app/core/entities/city_weather_entity.dart';
 import 'package:weather_app/core/error/failure_imp.dart';
 import 'package:weather_app/core/services/http_connections.dart';
-import 'package:weather_app/data/datasources/contracts/rest_countries.dart';
-import 'package:weather_app/data/dtos/capital_dto.dart';
+import 'package:weather_app/data/datasources/contracts/rest_weather.dart';
+import 'package:weather_app/data/dtos/city_weather_dto.dart';
 
-class RestCountriesDataSourceImp implements RestCountriesDataSource {
+class RestWeatherDataSourceImp implements RestWeatherDataSource {
   final HttpConections _apiProvider;
-  RestCountriesDataSourceImp(this._apiProvider);
+  RestWeatherDataSourceImp(this._apiProvider);
 
   @override
-  Future<List<CapitalEntity>> getCapitalsByRegion(String region) async {
+  Future<CityWeatherEntity> getWeatherData(CapitalEntity capitalEntity) async {
+    String capitalName = capitalEntity.capital ?? '';
+    String cca2 = capitalEntity.cca2 ?? '';
     try {
       var response = await _apiProvider.getConnect(
           url:
-              'https://restcountries.com/v3.1/region/$region?fields=name,capital,capitalInfo,cca2');
+              'https://api.openweathermap.org/data/2.5/weather?q=$capitalName,$cca2&appid=$restWeatherApiKey');
       if (response.statusCode == okStatus) {
-        List<CapitalEntity> capitalsList = (response.data as List<dynamic>)
-            .map((e) => CapitalDto.fromJson(e).toEntity())
-            .toList();
-        return capitalsList;
+        CityWeatherEntity cityWeatherEntity =
+            CityWeatherDto.fromJson(response.data).toEntity();
+        return cityWeatherEntity;
       } else {
         throw FailureImp(msg: response.data['message']);
       }
@@ -28,7 +30,7 @@ class RestCountriesDataSourceImp implements RestCountriesDataSource {
       if (dioError.response != null) {
         switch (dioError.response!.statusCode) {
           case badRequestStatus:
-            throw FailureImp(msg: 'Check if the region is correct');
+            throw FailureImp(msg: 'Check if capital name is correct');
           case notAuthorizedStatus:
             throw FailureImp(msg: 'Not Authorized');
           case notFoundStatus:
