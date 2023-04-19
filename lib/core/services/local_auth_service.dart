@@ -1,11 +1,17 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+final localAuthService = Provider((ref) => LocalAuthService());
 
 class LocalAuthService extends ChangeNotifier {
   late final SharedPreferences _sharedPreferences;
   bool isAuthenticated = false;
+  TextEditingController userTextController = TextEditingController();
+  TextEditingController passwordTextController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
-  Future<void> init() async {
+  Future<void> initSharedPreferences() async {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 

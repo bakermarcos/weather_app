@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 // APP DATA
 const String appName = "Weather App";
 const String imgLogo = "assets/images/circle-icons-weather.png";
@@ -25,6 +27,4 @@ const String occuredErrorMessage = 'An error occured, try again later.';
 const String connectionErrorMessage = 'Connection error, try again later.';
 
 // COLORS
-
-
-
+const Color primaryColor = Color(0x14306FFF);
