@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalAuthService {
+class LocalAuthService extends ChangeNotifier {
   late final SharedPreferences _sharedPreferences;
+  bool isAuthenticated = false;
 
   Future<void> init() async {
     _sharedPreferences = await SharedPreferences.getInstance();
@@ -13,17 +15,21 @@ class LocalAuthService {
       "password": password,
     };
     await _sharedPreferences.setString(user, userMap.toString());
+    isAuthenticated = false;
+    notifyListeners();
   }
 
-  Future<bool> signIn(String user, String password) async {
+  Future<void> signIn(String user, String password) async {
     Map<String, String> userMap = {
       "user": user,
       "password": password,
     };
     String? userString = _sharedPreferences.getString(user);
     if (userString == null) {
-      return false;
+      isAuthenticated = false;
+    } else {
+      isAuthenticated = userString == userMap.toString();
     }
-    return userString == userMap.toString();
+    notifyListeners();
   }
 }
