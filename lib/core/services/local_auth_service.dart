@@ -8,8 +8,12 @@ class LocalAuthService extends ChangeNotifier {
   late final SharedPreferences _sharedPreferences;
   bool isAuthenticated = false;
   TextEditingController userTextController = TextEditingController();
+  TextEditingController registerUserTextController = TextEditingController();
   TextEditingController passwordTextController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  TextEditingController registerPasswordTextController = TextEditingController();
+
+  final formKeySignIn = GlobalKey<FormState>();
+  final formKeySignUp = GlobalKey<FormState>();
 
   Future<void> initSharedPreferences() async {
     _sharedPreferences = await SharedPreferences.getInstance();

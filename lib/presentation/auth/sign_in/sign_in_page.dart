@@ -21,7 +21,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
           Image.asset(imgLogoUncircled),
           const Text('Sign In'),
           Form(
-            key: authProvider.formKey,
+            key: authProvider.formKeySignIn,
             child: Column(
               children: [
                 TextFormField(
@@ -41,7 +41,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
           ),
           ElevatedButton(
             onPressed: () {
-              if (authProvider.formKey.currentState!.validate()) {
+              if (authProvider.formKeySignIn.currentState!.validate()) {
                 authProvider.signIn(authProvider.userTextController.text,
                     authProvider.passwordTextController.text);
               }
