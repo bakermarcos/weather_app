@@ -26,10 +26,10 @@ class MainWeatherProperties {
 
   factory MainWeatherProperties.fromJson(Map<String, dynamic> json) {
     return MainWeatherProperties(
-      temp: json['temp'] ?? 0.0,
-      feelsLike: json['feels_like'] ?? 0.0,
-      tempMin: json['temp_min'] ?? 0.0,
-      tempMax: json['temp_max'] ?? 0.0,
+      temp: double.tryParse(json['temp'].toString()) ?? 0.0,
+      feelsLike: double.tryParse(json['feels_like'].toString()) ?? 0.0,
+      tempMin: double.tryParse(json['temp_min'].toString()) ?? 0.0,
+      tempMax: double.tryParse(json['temp_max'].toString()) ?? 0.0,
       pressure: json['pressure'] ?? 0,
       humidity: json['humidity'] ?? 0,
     );

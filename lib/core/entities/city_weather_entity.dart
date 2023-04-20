@@ -6,7 +6,7 @@ import 'package:weather_app/core/models/sys_data_model.dart';
 import 'package:weather_app/core/models/weather_data_model.dart';
 import 'package:weather_app/core/models/wind_data_model.dart';
 
-class CityWeatherEntity{
+class CityWeatherEntity {
 //   {
 // 	"coord": {
 // 		"lon": 55.4667,
@@ -68,7 +68,7 @@ class CityWeatherEntity{
   int? timezone;
   String? name;
   int? cod;
-  
+
   CityWeatherEntity({
     this.id,
     this.coord,
@@ -85,5 +85,5 @@ class CityWeatherEntity{
     this.name,
     this.cod,
   });
-
+  
 }

@@ -1,4 +1,5 @@
 import 'package:weather_app/core/entities/city_weather_entity.dart';
+import 'package:weather_app/data/dtos/city_weather_dto.dart';
 
 class CapitalEntity {
   final String? capital;
@@ -16,12 +17,4 @@ class CapitalEntity {
       this.cca2,
       this.cityWeather});
 
-  CapitalEntity.empty({
-    this.capital = '',
-    this.region = '',
-    this.countryName = '',
-    this.latlng = const [],
-    this.cca2 = '',
-    this.cityWeather,
-  });
 }

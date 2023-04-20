@@ -8,7 +8,13 @@ class RestCountriesUseCaseImp implements RestCountriesUseCase {
   final RestCountriesRepository repository;
   RestCountriesUseCaseImp(this.repository);
   @override
-  Future<Either<Failure, List<CapitalEntity>>> call(String region) async {
-    return await repository(region);
+  Future<Either<Failure, List<CapitalEntity>>> getCapitalsByRegion(
+      String region) async {
+    return await repository.getCapitalsByRegion(region);
+  }
+
+  @override
+  Future<Either<Failure, List<CapitalEntity>>> getAllCapitals() async {
+    return await repository.getAllCapitals();
   }
 }

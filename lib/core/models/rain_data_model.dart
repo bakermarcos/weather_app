@@ -11,8 +11,8 @@ class RainData {
   });
 
   factory RainData.fromJson(Map<String, dynamic> json) => RainData(
-        oneHour: json["1h"] ?? 0.0,
-        threeHour: json["3h"] ?? 0.0,
+        oneHour: double.tryParse(json["1h"].toString()) ?? 0.0,
+        threeHour: double.tryParse(json["3h"].toString()) ?? 0.0,
       );
 
   Map<String, dynamic> toJson() => {

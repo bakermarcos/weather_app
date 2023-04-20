@@ -18,7 +18,7 @@ class RestWeatherDataSourceImp implements RestWeatherDataSource {
     try {
       var response = await _apiProvider.getConnect(
           url:
-              'https://api.openweathermap.org/data/2.5/weather?q=$capitalName,$cca2&appid=$restWeatherApiKey');
+              'https://api.openweathermap.org/data/2.5/weather?q=$capitalName,$cca2&units=imperial&appid=$restWeatherApiKey');
       if (response.statusCode == okStatus) {
         CityWeatherEntity cityWeatherEntity =
             CityWeatherDto.fromJson(response.data).toEntity();

@@ -91,4 +91,23 @@ class CityWeatherDto extends CityWeatherEntity {
       cod: cod,
     );
   }
+
+  factory CityWeatherDto.empty() {
+    return CityWeatherDto(
+      id: 0,
+      coord: Coordinate.empty(),
+      weather: [],
+      base: '',
+      main: MainWeatherProperties.empty(),
+      visibility: 0,
+      wind: WindData.empty(),
+      rain: RainData.empty(),
+      clouds: CloudsData.empty(),
+      dt: 0,
+      sys: SysData.empty(),
+      timezone: 0,
+      name: '',
+      cod: 0,
+    );
+  }
 }

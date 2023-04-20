@@ -19,7 +19,7 @@ const int notFoundStatus = 404;
 const int internalErrorStatus = 500;
 
 // TIMES
-const Duration connectTimeout = Duration(milliseconds: 30000);
+const Duration connectTimeout = Duration(milliseconds: 50000);
 const Duration receiveTimeout = Duration(milliseconds: 25000);
 
 // ERRORS

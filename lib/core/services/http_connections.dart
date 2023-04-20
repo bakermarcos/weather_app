@@ -16,6 +16,7 @@ class HttpConections {
 
       return await dio.get(url);
     } catch (e) {
+
       rethrow;
     }
   }

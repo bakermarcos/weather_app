@@ -5,8 +5,8 @@ class Coordinate {
   Coordinate({this.lon, this.lat});
 
   Coordinate.fromJson(Map<String, dynamic> json) {
-    lon = json['lon'];
-    lat = json['lat'];
+    lon = double.tryParse(json['lon'].toString())??0.0;
+    lat = double.tryParse(json['lat'].toString())??0.0;
   }
 
   Map<String, dynamic> toJson() => {'lon': lon, 'lat': lat};

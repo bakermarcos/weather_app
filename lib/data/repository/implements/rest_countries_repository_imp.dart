@@ -8,9 +8,17 @@ class RestCountriesRepositoryImp implements RestCountriesRepository {
   final RestCountriesDataSource dataSource;
   RestCountriesRepositoryImp(this.dataSource);
   @override
-  Future<Either<Failure, List<CapitalEntity>>> call(String region) async {
+  Future<Either<Failure, List<CapitalEntity>>> getCapitalsByRegion(String region) async {
     try {
       return Right(await dataSource.getCapitalsByRegion(region));
+    } on Failure catch (e) {
+      return Left(e);
+    }
+  }
+  @override
+  Future<Either<Failure, List<CapitalEntity>>> getAllCapitals() async {
+    try {
+      return Right(await dataSource.getAllCapitals());
     } on Failure catch (e) {
       return Left(e);
     }
