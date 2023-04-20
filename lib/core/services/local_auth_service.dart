@@ -5,12 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 final localAuthService = Provider((ref) => LocalAuthService());
 
 class LocalAuthService extends ChangeNotifier {
-  late final SharedPreferences _sharedPreferences;
+  late SharedPreferences _sharedPreferences;
   bool isAuthenticated = false;
   TextEditingController userTextController = TextEditingController();
   TextEditingController registerUserTextController = TextEditingController();
   TextEditingController passwordTextController = TextEditingController();
-  TextEditingController registerPasswordTextController = TextEditingController();
+  TextEditingController registerPasswordTextController =
+      TextEditingController();
 
   final formKeySignIn = GlobalKey<FormState>();
   final formKeySignUp = GlobalKey<FormState>();
@@ -20,6 +21,7 @@ class LocalAuthService extends ChangeNotifier {
   }
 
   Future<void> signUp(String user, String password) async {
+    await initSharedPreferences();
     Map<String, String> userMap = {
       "user": user,
       "password": password,
@@ -30,6 +32,7 @@ class LocalAuthService extends ChangeNotifier {
   }
 
   Future<void> signIn(String user, String password) async {
+    await initSharedPreferences();
     Map<String, String> userMap = {
       "user": user,
       "password": password,

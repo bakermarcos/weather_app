@@ -1,4 +1,5 @@
 import 'package:weather_app/core/entities/capital_entity.dart';
+import 'package:weather_app/core/entities/city_weather_entity.dart';
 
 class CapitalDto extends CapitalEntity {
   CapitalDto({
@@ -7,12 +8,14 @@ class CapitalDto extends CapitalEntity {
     String? countryName,
     List<dynamic>? latlng,
     String? cca2,
+    CityWeatherEntity? cityWeather,
   }) : super(
           capital: capital,
           region: region,
           countryName: countryName,
           latlng: latlng,
           cca2: cca2,
+          cityWeather: cityWeather,
         );
 
   factory CapitalDto.fromJson(Map<String, dynamic> json) {
@@ -22,6 +25,7 @@ class CapitalDto extends CapitalEntity {
       countryName: json['name'] != null ? json['name']['common'] ?? '' : '',
       latlng: json['latlng'] ?? const [],
       cca2: json['cca2'] ?? '',
+      cityWeather: json['cityWeather'] ?? CityWeatherEntity(),
     );
   }
 
@@ -32,6 +36,7 @@ class CapitalDto extends CapitalEntity {
       countryName: countryName,
       latlng: latlng,
       cca2: cca2,
+      cityWeather: cityWeather,
     );
   }
 }

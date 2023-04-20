@@ -9,17 +9,7 @@ import 'package:weather_app/presentation/weather/detailed_capitals_weathers_page
 final LocalAuthService localAuthService = LocalAuthService();
 
 final routes = GoRouter(
-    initialLocation: '/capital_list',
-    refreshListenable: localAuthService,
-    redirect: (context, state) {
-      final isAuthenticated = localAuthService.isAuthenticated;
-      final isLoginRoute = state.subloc == '/sign_in';
-      if (!isAuthenticated) {
-        return isLoginRoute ? null : '/sign_in';
-      }
-      if (isLoginRoute) return '/capital_list';
-      return null;
-    },
+    initialLocation: '/',
     routes: [
       GoRoute(
           path: '/sign_in', builder: (context, state) => const SignInPage()),
